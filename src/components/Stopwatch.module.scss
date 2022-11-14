@@ -1,0 +1,55 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.screen {
+    width: 700px;
+    height: 250px;
+    line-height: 225px;
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-size: 190px;
+    border-radius: 20px;
+    user-select: none;
+}
+
+.controlBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    %btn {
+        width: 200px;
+        height: 75px;
+        border: 2px solid black;
+        border-radius: 15px;
+        margin: 20px 30px;
+        font-size: 36px;
+        font-weight: bold;
+        text-align: center;
+        user-select: none;
+
+        &:hover {
+            filter: brightness(0.7);
+            transition: 0.2s;
+        }
+
+        &:active {
+            transition: none;
+            filter: invert(1);
+        }
+    }
+
+    .btnStart {
+        @extend %btn;
+        background-color: lightgreen;
+    }
+
+    .btnStop {
+        @extend %btn;
+        background-color: lightcoral;
+    }
+}
