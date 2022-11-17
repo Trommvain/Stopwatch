@@ -4,7 +4,7 @@ import styles from './Stopwatch.module.scss';
 class Stopwatch extends Component {
     state = {
         timeValue: 0,
-        isStarted: false       //to solve multiple start button clicks problem
+        isStarted: false
     }
 
     startTimer = () => {
@@ -12,12 +12,14 @@ class Stopwatch extends Component {
 
         this.setState({
             timeValue: timeValue + 1,
-            isStarted: true
         })
     }
 
     handleStartBtn = () => {
         this.timerId = setInterval(this.startTimer, 1000);
+        this.setState({
+            isStarted: true,
+        })
     }
 
     handleStopBtn = () => {
@@ -25,6 +27,12 @@ class Stopwatch extends Component {
         this.setState({
             isStarted: false
         });
+    }
+
+    handleResetBtn = () => {
+        this.setState({
+            timeValue: 0,
+        })
     }
 
     componentWillUnmount() {
@@ -36,8 +44,23 @@ class Stopwatch extends Component {
             <div className={styles.container}>
                 <section className={styles.screen}>{this.state.timeValue}</section>
                 <section className={styles.controlBlock}>
-                    <button className={styles.btnStart}onClick={!this.state.isStarted ? this.handleStartBtn : null}>START</button>
-                    <button className={styles.btnStop} onClick={this.handleStopBtn}>STOP</button>
+                    {this.state.isStarted ?
+                    <button 
+                        className={styles.btnStop} 
+                        onClick={this.handleStopBtn}>STOP
+                    </button>
+                    :
+                    <button 
+                        className={styles.btnStart}
+                        onClick={
+                            !this.state.isStarted ? 
+                            this.handleStartBtn
+                            : null}>START
+                    </button>}
+                    <button
+                        className={styles.btnReset}
+                        onClick={this.handleResetBtn}
+                        >RESET</button>
                 </section>
             </div>
         );

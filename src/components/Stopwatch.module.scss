@@ -52,4 +52,9 @@
         @extend %btn;
         background-color: lightcoral;
     }
+
+    .btnReset {
+        @extend %btn;
+        background-color: lightgray;
+    }
 }
