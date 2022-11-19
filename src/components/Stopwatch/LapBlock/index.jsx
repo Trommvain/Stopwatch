@@ -3,12 +3,12 @@ import styles from './LapBlock.module.scss';
 
 class LapBlock extends Component {
     render() {
-        const { laps } = this.props;
+        const { laps, convertToDate } = this.props;
         const lapsList = laps.map((lap, index) => {
             return (
                 <li key={index}>
-                    <p>{`Lap time: ${index === 0 ? lap : lap - laps[index - 1]} s`}</p>
-                    <p>{`Total time: ${lap} s`}</p>
+                    <p>{`Lap time: ${index === 0 ? convertToDate(lap) : convertToDate(lap - laps[index - 1])}`}</p>
+                    <p>{`Total time: ${convertToDate(lap)}`}</p>
                 </li>
             );
         })
