@@ -1,4 +1,3 @@
-import "./reset.css";
 import styles from "./App.module.scss";
 import Stopwatch from "./components/Stopwatch";
 

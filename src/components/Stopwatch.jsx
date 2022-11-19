@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import styles from './Stopwatch.module.scss';
+import LapBlock from './LapBlock/LapBlock';
 
 class Stopwatch extends Component {
     state = {
         timeValue: 0,
-        isStarted: false
+        isStarted: false,
+        laps: []
     }
 
     startTimer = () => {
@@ -32,14 +34,31 @@ class Stopwatch extends Component {
     handleResetBtn = () => {
         this.setState({
             timeValue: 0,
+            laps: []
+        });
+    }
+
+    handleLapBtn = () => {
+        const { timeValue, laps } = this.state;
+        this.setState({
+            laps: [...laps, timeValue]
+        });
+    }
+
+    componentDidMount() {
+        this.timerId = setInterval(this.startTimer, 1000);
+        this.setState({
+            isStarted: true,
         })
     }
+    
 
     componentWillUnmount() {
         clearInterval(this.timerId);
     }
 
     render() {
+        const { laps } = this.state;
         return (
             <div className={styles.container}>
                 <section className={styles.screen}>{this.state.timeValue}</section>
@@ -60,8 +79,15 @@ class Stopwatch extends Component {
                     <button
                         className={styles.btnReset}
                         onClick={this.handleResetBtn}
-                        >RESET</button>
+                        >RESET
+                    </button>
+                    <button
+                        className={styles.btnLap}
+                        onClick={this.handleLapBtn}
+                        >LAP
+                    </button>
                 </section>
+                <LapBlock laps={laps} />
             </div>
         );
     }
