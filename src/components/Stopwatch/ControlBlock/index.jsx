@@ -28,21 +28,11 @@ class ControlBlock extends Component {
         
         return (
             <section className={styles.controlBlock}>
-                {
-                    isStarted ?
-                    <button 
-                        className={styles.btnStop} 
-                        onClick={this.handleStopBtn}>STOP
-                    </button>
-                    :
-                    <button 
-                        className={styles.btnStart}
-                        onClick={
-                            !isStarted ? 
-                            this.handleStartBtn
-                            : null}>START
-                    </button>
-                }
+                <button 
+                    className={isStarted ? styles.btnStop : styles.btnStart} 
+                    onClick={isStarted ? this.handleStopBtn : this.handleStartBtn}>
+                    { isStarted ? 'STOP' : 'START'}
+                </button>
                 <button
                     className={styles.btnReset}
                     onClick={this.handleResetBtn}
