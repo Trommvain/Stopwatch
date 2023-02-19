@@ -52,10 +52,12 @@ class Stopwatch extends Component {
     }
 
     createLap = () => {
-        const { timeValue, laps } = this.state;
-        this.setState({
+        const { timeValue, laps, isStarted } = this.state;
+        if (isStarted) {
+            this.setState({
             laps: [...laps, timeValue]
-        });
+            });
+        }
     }
 
     componentDidMount() {
